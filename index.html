@@ -4,15 +4,17 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>{Title}</title>
+  <link rel="shortcut icon" href="http://cdn.sitterfied.com/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="http://static.tumblr.com/vbjnszm/0V7mj2bzc/reset.css" />
   <link rel="stylesheet" type="text/css" href="http://cdn.sitterfied.com/blog/css/blog.css" />
 
   <!-- Javascript -->
-  <script src="http://twitterjs.googlecode.com/svn/trunk/src/twitter.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitterlib.js/1.0.8/twitterlib.min.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
   <script type="text/javascript" src="http://cdn.sitterfied.com/blog/js/jquery.jribbble-1.0.1.ugly.js"></script>
   <script type="text/javascript" src="http://cdn.sitterfied.com/blog/js/stevie.js"></script>
+
   <!-- Images -->
   <meta name="image:Logo" content=""/>
 
@@ -296,9 +298,15 @@
             <div class="block" id="twitter-feed">
                 <h4>Twitter Feed<a href="http://www.twitter.com/{text:Twitter Username}">{text:Twitter Username} →</a>
                 </h4>
-                <div id="tweets">
-                    <p>Loading Tweets</p>
-                </div>
+                <p id="tweets"/>
+                <script>
+						        twitterlib.timeline('sitterfied', { limit: 5 }, function (tweets) {
+						            for (var i = 0; i < tweets.length; i++) {
+						                console.log(this.ify.clean(tweets[i].text));
+						            		document.getElementById('tweets').innerHTML = ret.join('<br />')
+						            }
+						        });
+						    </script>
             </div>
 
             <script type="text/javascript" charset="utf-8">
